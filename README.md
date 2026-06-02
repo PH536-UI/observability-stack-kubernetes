@@ -1,36 +1,61 @@
-# Observability Stack
+# Kubernetes Observability Stack
 
-Stack de observabilidade utilizando:
+Projeto de observabilidade executado localmente utilizando Kubernetes (Kind).
 
+## Stack
+
+- Kubernetes (Kind)
 - Grafana
+- Prometheus
 - Loki
 - Promtail
-- Docker Compose
+- Node Exporter
 
-## Funcionalidades
+## Arquitetura
 
-- Coleta de logs Linux
-- Coleta de logs Docker
-- Centralização em Loki
-- Visualização em Grafana
+Logs:
+Host -> Promtail -> Loki -> Grafana
 
-## Executar
+Métricas:
+Node Exporter -> Prometheus -> Grafana
+
+## Tecnologias
+
+- Docker
+- Kubernetes
+- PromQL
+- LogQL
+- Linux
+- YAML
+
+## Evidências
+
+### Pods
+
+![pods](screenshots/evidencia.png)
+
+### Prometheus Targets
+
+![targets](screenshots/evidencia4.png)
+
+### Loki Logs
+
+![loki](screenshots/evidencia7.png)
+
+### Grafana Dashboard
+
+![grafana](screenshots/evidencia10.png)
+
+## Como executar
 
 ```bash
-docker compose up -d
+kubectl apply -f kubernetes/
 ```
 
-## Acessar
+## Aprendizados
 
-Grafana:
-
-http://localhost:3000
-
-Usuário:
-
-admin
-
-Senha:
-
-admin
-```
+- Troubleshooting Kubernetes
+- Observabilidade moderna
+- Monitoramento com Prometheus
+- Centralização de logs com Loki
+- Dashboards Grafana
