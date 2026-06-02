@@ -1,0 +1,1460 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-06-02T12:00:40Z"
+    generateName: grafana-845ff8fcdb-
+    generation: 1
+    labels:
+      app: grafana
+      pod-template-hash: 845ff8fcdb
+    name: grafana-845ff8fcdb-srcmn
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: grafana-845ff8fcdb
+      uid: f3e0db38-c482-4c92-ae2b-8637c9d52fc0
+    resourceVersion: "103746"
+    uid: a8da07cb-3f3e-428d-9222-dbdfae72ad47
+  spec:
+    containers:
+    - image: grafana/grafana:latest
+      imagePullPolicy: Always
+      name: grafana
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-lzrtk
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: observability-control-plane
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-lzrtk
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T12:06:44Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T12:00:43Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T12:06:44Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T12:06:44Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T12:00:42Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://57bbd17e43fc05d5088ef43a812dded7030bf19d9ab18b81405305a83811686a
+      image: docker.io/grafana/grafana:latest
+      imageID: docker.io/grafana/grafana@sha256:2d1f9ae67c1778d33e291d4c3c759cd8b650e67491f02533499eb950e075eeb5
+      lastState: {}
+      name: grafana
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-06-02T12:06:44Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 472
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-lzrtk
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.2
+    hostIPs:
+    - ip: 172.21.0.2
+    observedGeneration: 1
+    phase: Running
+    podIP: 10.244.0.10
+    podIPs:
+    - ip: 10.244.0.10
+    qosClass: BestEffort
+    startTime: "2026-06-02T12:00:43Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-06-01T15:22:43Z"
+    generateName: loki-66968d6456-
+    generation: 1
+    labels:
+      app: loki
+      pod-template-hash: 66968d6456
+    name: loki-66968d6456-thr4c
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: loki-66968d6456
+      uid: 2679348c-3a13-420e-bb3a-5a78398f0edb
+    resourceVersion: "4298"
+    uid: 36ad8086-50f7-45fb-bd73-3d4626862cca
+  spec:
+    containers:
+    - args:
+      - -config.file=/etc/loki/local-config.yaml
+      image: grafana/loki:2.9.8
+      imagePullPolicy: IfNotPresent
+      name: loki
+      ports:
+      - containerPort: 3100
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-lvrfr
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: observability-control-plane
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-lvrfr
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-01T15:24:23Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-01T15:22:43Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-01T15:24:23Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-01T15:24:23Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-01T15:22:43Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://f941009f3f7f962ea5b1bc7731bdf25e93afd058799414e833644f346c834e9b
+      image: docker.io/grafana/loki:2.9.8
+      imageID: docker.io/grafana/loki@sha256:8b5bd7748d0e4da66cd741ac276e485517514af0bea32167e27c0e1a95bcf8aa
+      lastState: {}
+      name: loki
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-06-01T15:24:23Z"
+      user:
+        linux:
+          gid: 10001
+          supplementalGroups:
+          - 10001
+          uid: 10001
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-lvrfr
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.2
+    hostIPs:
+    - ip: 172.21.0.2
+    observedGeneration: 1
+    phase: Running
+    podIP: 10.244.0.7
+    podIPs:
+    - ip: 10.244.0.7
+    qosClass: BestEffort
+    startTime: "2026-06-01T15:22:43Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-06-02T13:18:21Z"
+    generateName: node-exporter-59d69bd8d7-
+    generation: 1
+    labels:
+      app: node-exporter
+      pod-template-hash: 59d69bd8d7
+    name: node-exporter-59d69bd8d7-5brpm
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: node-exporter-59d69bd8d7
+      uid: 910f324e-f5ab-4f28-9231-5103acfb801c
+    resourceVersion: "109538"
+    uid: 1dd0f29d-a097-450e-abfc-db7fa5849f28
+  spec:
+    containers:
+    - image: prom/node-exporter:latest
+      imagePullPolicy: Always
+      name: node-exporter
+      ports:
+      - containerPort: 9100
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-nclhg
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: observability-control-plane
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-nclhg
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:18:41Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:18:21Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:18:41Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:18:41Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:18:21Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://5b2f6e15471b9c0000e52c77b514c3310e5a001d7984e8fe952662a727570028
+      image: docker.io/prom/node-exporter:latest
+      imageID: docker.io/prom/node-exporter@sha256:e9cff4fc67b1818f8c97adb115b9f12c9a54b533de86765d4a0effc01b357205
+      lastState: {}
+      name: node-exporter
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-06-02T13:18:41Z"
+      user:
+        linux:
+          gid: 65534
+          supplementalGroups:
+          - 65534
+          uid: 65534
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-nclhg
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.2
+    hostIPs:
+    - ip: 172.21.0.2
+    observedGeneration: 1
+    phase: Running
+    podIP: 10.244.0.12
+    podIPs:
+    - ip: 10.244.0.12
+    qosClass: BestEffort
+    startTime: "2026-06-02T13:18:21Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-06-02T14:18:28Z"
+    generateName: prometheus-74888c98d8-
+    generation: 1
+    labels:
+      app: prometheus
+      pod-template-hash: 74888c98d8
+    name: prometheus-74888c98d8-2m29j
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: prometheus-74888c98d8
+      uid: bc7aba90-c2c8-4beb-8933-75ddd2bec4fc
+    resourceVersion: "114401"
+    uid: cbc7cd76-3ad0-4f53-9700-b0b85d211d7d
+  spec:
+    containers:
+    - args:
+      - --config.file=/etc/prometheus/prometheus.yml
+      image: prom/prometheus:v3.4.1
+      imagePullPolicy: IfNotPresent
+      name: prometheus
+      ports:
+      - containerPort: 9090
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/prometheus
+        name: prometheus-config
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-lfcql
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: observability-control-plane
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: prometheus-config
+      name: prometheus-config
+    - name: kube-api-access-lfcql
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T14:18:29Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T14:18:28Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T14:18:29Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T14:18:29Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T14:18:28Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://4d39920d0d38704db375d211c6eb7c64a3fc6da557ddf5fce6d65191a15a9c80
+      image: docker.io/prom/prometheus:v3.4.1
+      imageID: docker.io/prom/prometheus@sha256:9abc6cf6aea7710d163dbb28d8eeb7dc5baef01e38fa4cd146a406dd9f07f70d
+      lastState: {}
+      name: prometheus
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-06-02T14:18:29Z"
+      user:
+        linux:
+          gid: 65534
+          supplementalGroups:
+          - 65534
+          uid: 65534
+      volumeMounts:
+      - mountPath: /etc/prometheus
+        name: prometheus-config
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-lfcql
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.2
+    hostIPs:
+    - ip: 172.21.0.2
+    observedGeneration: 1
+    phase: Running
+    podIP: 10.244.0.14
+    podIPs:
+    - ip: 10.244.0.14
+    qosClass: BestEffort
+    startTime: "2026-06-02T14:18:28Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-06-02T13:00:01Z"
+    generateName: promtail-5b848bd444-
+    generation: 1
+    labels:
+      app: promtail
+      pod-template-hash: 5b848bd444
+    name: promtail-5b848bd444-sc56n
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: promtail-5b848bd444
+      uid: f0d8bbea-82ef-41a1-925e-bb7fe265b4cc
+    resourceVersion: "108025"
+    uid: b0223a35-4dcc-47bb-b751-990651f2c878
+  spec:
+    containers:
+    - args:
+      - -config.file=/etc/promtail/promtail.yaml
+      image: grafana/promtail:2.9.8
+      imagePullPolicy: IfNotPresent
+      name: promtail
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/promtail
+        name: config
+      - mountPath: /var/log
+        name: varlog
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-n24hj
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: observability-control-plane
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: promtail-config
+      name: config
+    - hostPath:
+        path: /var/log
+        type: ""
+      name: varlog
+    - name: kube-api-access-n24hj
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:00:05Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:00:02Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:00:05Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:00:05Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-02T13:00:01Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://29c2af432c0e3efd21b1c0564371994271657021cd754500aa446247221b8dfe
+      image: docker.io/grafana/promtail:2.9.8
+      imageID: docker.io/grafana/promtail@sha256:45d54f0ebd7a19acbcd4693a3227d84d27d98abe1dc7ea3068d31d5d02dbe696
+      lastState: {}
+      name: promtail
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-06-02T13:00:04Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /etc/promtail
+        name: config
+      - mountPath: /var/log
+        name: varlog
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-n24hj
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.2
+    hostIPs:
+    - ip: 172.21.0.2
+    observedGeneration: 1
+    phase: Running
+    podIP: 10.244.0.11
+    podIPs:
+    - ip: 10.244.0.11
+    qosClass: BestEffort
+    startTime: "2026-06-02T13:00:02Z"
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2026-06-02T12:01:09Z"
+    labels:
+      app: grafana
+    name: grafana
+    namespace: observability
+    resourceVersion: "103285"
+    uid: e7f9f53f-204d-4b5f-a08c-12988ed96a02
+  spec:
+    clusterIP: 10.96.109.62
+    clusterIPs:
+    - 10.96.109.62
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 3000
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      app: grafana
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"loki","namespace":"observability"},"spec":{"ports":[{"port":3100,"targetPort":3100}],"selector":{"app":"loki"}}}
+    creationTimestamp: "2026-06-01T15:22:43Z"
+    name: loki
+    namespace: observability
+    resourceVersion: "4140"
+    uid: ce7f39a4-a48b-4dd4-92bc-238c4e96a8d7
+  spec:
+    clusterIP: 10.96.161.81
+    clusterIPs:
+    - 10.96.161.81
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 3100
+      protocol: TCP
+      targetPort: 3100
+    selector:
+      app: loki
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2026-06-02T13:18:38Z"
+    name: node-exporter
+    namespace: observability
+    resourceVersion: "109528"
+    uid: e2a155e6-f04d-4883-9ad0-2395542af98a
+  spec:
+    clusterIP: 10.96.160.178
+    clusterIPs:
+    - 10.96.160.178
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 9100
+      protocol: TCP
+      targetPort: 9100
+    selector:
+      app: node-exporter
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"prometheus","namespace":"observability"},"spec":{"ports":[{"port":9090,"targetPort":9090}],"selector":{"app":"prometheus"}}}
+    creationTimestamp: "2026-06-01T15:32:12Z"
+    name: prometheus
+    namespace: observability
+    resourceVersion: "4934"
+    uid: 37604ecd-668d-485b-b2f7-3c80bb47a7fa
+  spec:
+    clusterIP: 10.96.9.86
+    clusterIPs:
+    - 10.96.9.86
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 9090
+      protocol: TCP
+      targetPort: 9090
+    selector:
+      app: prometheus
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-06-02T12:00:38Z"
+    generation: 1
+    labels:
+      app: grafana
+    name: grafana
+    namespace: observability
+    resourceVersion: "103748"
+    uid: b2e4918c-d4f0-4ff5-94d4-0e45565264a7
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: grafana
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: grafana
+      spec:
+        containers:
+        - image: grafana/grafana:latest
+          imagePullPolicy: Always
+          name: grafana
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-02T12:06:45Z"
+      lastUpdateTime: "2026-06-02T12:06:45Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-06-02T12:00:40Z"
+      lastUpdateTime: "2026-06-02T12:06:45Z"
+      message: ReplicaSet "grafana-845ff8fcdb" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"loki","namespace":"observability"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"loki"}},"template":{"metadata":{"labels":{"app":"loki"}},"spec":{"containers":[{"args":["-config.file=/etc/loki/local-config.yaml"],"image":"grafana/loki:2.9.8","name":"loki","ports":[{"containerPort":3100}]}]}}}}
+    creationTimestamp: "2026-06-01T15:22:43Z"
+    generation: 1
+    name: loki
+    namespace: observability
+    resourceVersion: "4302"
+    uid: 4933a9f4-d667-4f27-ab60-632210b50070
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: loki
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: loki
+      spec:
+        containers:
+        - args:
+          - -config.file=/etc/loki/local-config.yaml
+          image: grafana/loki:2.9.8
+          imagePullPolicy: IfNotPresent
+          name: loki
+          ports:
+          - containerPort: 3100
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-01T15:24:24Z"
+      lastUpdateTime: "2026-06-01T15:24:24Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-06-01T15:22:43Z"
+      lastUpdateTime: "2026-06-01T15:24:24Z"
+      message: ReplicaSet "loki-66968d6456" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"node-exporter","namespace":"observability"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"node-exporter"}},"template":{"metadata":{"labels":{"app":"node-exporter"}},"spec":{"containers":[{"image":"prom/node-exporter:latest","name":"node-exporter","ports":[{"containerPort":9100}]}]}}}}
+    creationTimestamp: "2026-06-02T13:18:20Z"
+    generation: 1
+    name: node-exporter
+    namespace: observability
+    resourceVersion: "109542"
+    uid: 63408750-6e91-4870-b6fd-0cfdff027171
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: node-exporter
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: node-exporter
+      spec:
+        containers:
+        - image: prom/node-exporter:latest
+          imagePullPolicy: Always
+          name: node-exporter
+          ports:
+          - containerPort: 9100
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-02T13:18:41Z"
+      lastUpdateTime: "2026-06-02T13:18:41Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-06-02T13:18:21Z"
+      lastUpdateTime: "2026-06-02T13:18:41Z"
+      message: ReplicaSet "node-exporter-59d69bd8d7" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"prometheus","namespace":"observability"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"prometheus"}},"template":{"metadata":{"labels":{"app":"prometheus"}},"spec":{"containers":[{"args":["--config.file=/etc/prometheus/prometheus.yml"],"image":"prom/prometheus:v3.4.1","name":"prometheus","ports":[{"containerPort":9090}],"volumeMounts":[{"mountPath":"/etc/prometheus","name":"prometheus-config"}]}],"volumes":[{"configMap":{"name":"prometheus-config"},"name":"prometheus-config"}]}}}}
+    creationTimestamp: "2026-06-02T14:18:28Z"
+    generation: 1
+    name: prometheus
+    namespace: observability
+    resourceVersion: "114405"
+    uid: 752c88d8-fc11-4a99-853f-50c2b7f5789a
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: prometheus
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: prometheus
+      spec:
+        containers:
+        - args:
+          - --config.file=/etc/prometheus/prometheus.yml
+          image: prom/prometheus:v3.4.1
+          imagePullPolicy: IfNotPresent
+          name: prometheus
+          ports:
+          - containerPort: 9090
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/prometheus
+            name: prometheus-config
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: prometheus-config
+          name: prometheus-config
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-02T14:18:29Z"
+      lastUpdateTime: "2026-06-02T14:18:29Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-06-02T14:18:28Z"
+      lastUpdateTime: "2026-06-02T14:18:29Z"
+      message: ReplicaSet "prometheus-74888c98d8" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"promtail","namespace":"observability"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"promtail"}},"template":{"metadata":{"labels":{"app":"promtail"}},"spec":{"containers":[{"args":["-config.file=/etc/promtail/promtail.yaml"],"image":"grafana/promtail:2.9.8","name":"promtail","volumeMounts":[{"mountPath":"/etc/promtail","name":"config"},{"mountPath":"/var/log","name":"varlog"}]}],"volumes":[{"configMap":{"name":"promtail-config"},"name":"config"},{"hostPath":{"path":"/var/log"},"name":"varlog"}]}}}}
+    creationTimestamp: "2026-06-02T13:00:00Z"
+    generation: 1
+    name: promtail
+    namespace: observability
+    resourceVersion: "108028"
+    uid: 1f0ffc2e-cca8-4c5b-993a-87d413f0b4c8
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: promtail
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: promtail
+      spec:
+        containers:
+        - args:
+          - -config.file=/etc/promtail/promtail.yaml
+          image: grafana/promtail:2.9.8
+          imagePullPolicy: IfNotPresent
+          name: promtail
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/promtail
+            name: config
+          - mountPath: /var/log
+            name: varlog
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: promtail-config
+          name: config
+        - hostPath:
+            path: /var/log
+            type: ""
+          name: varlog
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-02T13:00:05Z"
+      lastUpdateTime: "2026-06-02T13:00:05Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-06-02T13:00:00Z"
+      lastUpdateTime: "2026-06-02T13:00:05Z"
+      message: ReplicaSet "promtail-5b848bd444" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-06-02T12:00:39Z"
+    generation: 1
+    labels:
+      app: grafana
+      pod-template-hash: 845ff8fcdb
+    name: grafana-845ff8fcdb
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: grafana
+      uid: b2e4918c-d4f0-4ff5-94d4-0e45565264a7
+    resourceVersion: "103747"
+    uid: f3e0db38-c482-4c92-ae2b-8637c9d52fc0
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: grafana
+        pod-template-hash: 845ff8fcdb
+    template:
+      metadata:
+        labels:
+          app: grafana
+          pod-template-hash: 845ff8fcdb
+      spec:
+        containers:
+        - image: grafana/grafana:latest
+          imagePullPolicy: Always
+          name: grafana
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-06-01T15:22:43Z"
+    generation: 1
+    labels:
+      app: loki
+      pod-template-hash: 66968d6456
+    name: loki-66968d6456
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: loki
+      uid: 4933a9f4-d667-4f27-ab60-632210b50070
+    resourceVersion: "4300"
+    uid: 2679348c-3a13-420e-bb3a-5a78398f0edb
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: loki
+        pod-template-hash: 66968d6456
+    template:
+      metadata:
+        labels:
+          app: loki
+          pod-template-hash: 66968d6456
+      spec:
+        containers:
+        - args:
+          - -config.file=/etc/loki/local-config.yaml
+          image: grafana/loki:2.9.8
+          imagePullPolicy: IfNotPresent
+          name: loki
+          ports:
+          - containerPort: 3100
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-06-02T13:18:21Z"
+    generation: 1
+    labels:
+      app: node-exporter
+      pod-template-hash: 59d69bd8d7
+    name: node-exporter-59d69bd8d7
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: node-exporter
+      uid: 63408750-6e91-4870-b6fd-0cfdff027171
+    resourceVersion: "109541"
+    uid: 910f324e-f5ab-4f28-9231-5103acfb801c
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: node-exporter
+        pod-template-hash: 59d69bd8d7
+    template:
+      metadata:
+        labels:
+          app: node-exporter
+          pod-template-hash: 59d69bd8d7
+      spec:
+        containers:
+        - image: prom/node-exporter:latest
+          imagePullPolicy: Always
+          name: node-exporter
+          ports:
+          - containerPort: 9100
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-06-02T14:18:28Z"
+    generation: 1
+    labels:
+      app: prometheus
+      pod-template-hash: 74888c98d8
+    name: prometheus-74888c98d8
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: prometheus
+      uid: 752c88d8-fc11-4a99-853f-50c2b7f5789a
+    resourceVersion: "114404"
+    uid: bc7aba90-c2c8-4beb-8933-75ddd2bec4fc
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: prometheus
+        pod-template-hash: 74888c98d8
+    template:
+      metadata:
+        labels:
+          app: prometheus
+          pod-template-hash: 74888c98d8
+      spec:
+        containers:
+        - args:
+          - --config.file=/etc/prometheus/prometheus.yml
+          image: prom/prometheus:v3.4.1
+          imagePullPolicy: IfNotPresent
+          name: prometheus
+          ports:
+          - containerPort: 9090
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/prometheus
+            name: prometheus-config
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: prometheus-config
+          name: prometheus-config
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-06-02T13:00:00Z"
+    generation: 1
+    labels:
+      app: promtail
+      pod-template-hash: 5b848bd444
+    name: promtail-5b848bd444
+    namespace: observability
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: promtail
+      uid: 1f0ffc2e-cca8-4c5b-993a-87d413f0b4c8
+    resourceVersion: "108026"
+    uid: f0d8bbea-82ef-41a1-925e-bb7fe265b4cc
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: promtail
+        pod-template-hash: 5b848bd444
+    template:
+      metadata:
+        labels:
+          app: promtail
+          pod-template-hash: 5b848bd444
+      spec:
+        containers:
+        - args:
+          - -config.file=/etc/promtail/promtail.yaml
+          image: grafana/promtail:2.9.8
+          imagePullPolicy: IfNotPresent
+          name: promtail
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/promtail
+            name: config
+          - mountPath: /var/log
+            name: varlog
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: promtail-config
+          name: config
+        - hostPath:
+            path: /var/log
+            type: ""
+          name: varlog
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

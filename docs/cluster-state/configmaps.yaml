@@ -1,0 +1,96 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIDBTCCAe2gAwIBAgIIPR5rTcLquVcwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczAeFw0yNjA2MDExNDMxNTNaFw0zNjA1MjkxNDM2NTNaMBUx
+      EzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+      AoIBAQCtqzeM2MYQawlPFlqixkiJ85+j5WojwUuZ1xrcro06PRvMO2RgNVNonvMl
+      04EPOu33aHPLFWVRcx7lL8GDKTKq1RHiXDPRV9ls4wivgy1YKHQ0gTyP18zFmUsg
+      zkmsnJG4Gqop/tiVPRZhJeKVBN+Ee7QmwcPLsdkZKoRauP4BJzD0SknBqfMF366Z
+      Z7w24JNyheVHmpFk3XOCrtkTMFY4PhBfJuOJXsQ40/FsI19bFv5HpU1Kh2wAUSxB
+      VCfaJxHk4khhcTMZeMuLvM2nKOAUUH8DwjpxCFBvxrSCoesicO+s1lv3dUzgM/P5
+      ArrrkxZqbyeNvSC0BSQmGyfsDNpFAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBQ4PTFf6ldpWvIrDrqVbAu90uQY0zAV
+      BgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQCe7d/J4RQc
+      C/NGMO2nIt/SvELwafkLxJJKVEu59q3rgO/hkLNeoCrtVsfEL7k02aQU4yIVF8RS
+      B7gJEvmpUe5cnQUmk2j4LRzkMVvJIcmJMXSqtIGUZODZh6jlW8mDgPycretjU63e
+      BK2QAmLqN+O8OZ5PSL32+qrHWUig1cGJQDtHlTP892CjlRcP4JfapSoVfWZrk8wF
+      AHtWhv0rrcaYUFHK8PJrRDo/uzTKv/yicSBeP/UCM9pBNtV+KyCqBHdPenTJnJzr
+      S7ytvhLz9G/7T+t6+PMSM1et6oxaKbHXlLCBDbL57qNmObDeGsJzJ5BjB7v9osve
+      843L4K4mRUow
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2026-06-01T15:22:43Z"
+    name: kube-root-ca.crt
+    namespace: observability
+    resourceVersion: "4125"
+    uid: 12f069a3-a2f2-4dd0-a1f3-60824f8d35d8
+- apiVersion: v1
+  data:
+    prometheus.yml: |
+      global:
+        scrape_interval: 15s
+
+      scrape_configs:
+
+      - job_name: prometheus
+        static_configs:
+        - targets:
+          - localhost:9090
+
+      - job_name: node-exporter
+        static_configs:
+        - targets:
+          - node-exporter:9100
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"prometheus.yml":"global:\n  scrape_interval: 15s\n\nscrape_configs:\n\n- job_name: prometheus\n  static_configs:\n  - targets:\n    - localhost:9090\n\n- job_name: node-exporter\n  static_configs:\n  - targets:\n    - node-exporter:9100\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"prometheus-config","namespace":"observability"}}
+    creationTimestamp: "2026-06-02T13:53:44Z"
+    name: prometheus-config
+    namespace: observability
+    resourceVersion: "112341"
+    uid: cb2d7917-28ad-4bee-9003-d8e899153d9e
+- apiVersion: v1
+  data:
+    promtail.yaml: |
+      server:
+        http_listen_port: 9080
+
+      positions:
+        filename: /tmp/positions.yaml
+
+      clients:
+        - url: http://loki:3100/loki/api/v1/push
+
+      scrape_configs:
+        - job_name: varlogs
+          static_configs:
+            - targets:
+                - localhost
+              labels:
+                job: varlogs
+                __path__: /var/log/*.log
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"promtail.yaml":"server:\n  http_listen_port: 9080\n\npositions:\n  filename: /tmp/positions.yaml\n\nclients:\n  - url: http://loki:3100/loki/api/v1/push\n\nscrape_configs:\n  - job_name: varlogs\n    static_configs:\n      - targets:\n          - localhost\n        labels:\n          job: varlogs\n          __path__: /var/log/*.log\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"promtail-config","namespace":"observability"}}
+    creationTimestamp: "2026-06-02T12:58:56Z"
+    name: promtail-config
+    namespace: observability
+    resourceVersion: "107917"
+    uid: be707104-8387-4a84-9039-ce98ee1704f2
+kind: List
+metadata:
+  resourceVersion: ""
