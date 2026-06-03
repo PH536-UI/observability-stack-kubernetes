@@ -1,4 +1,4 @@
-# Kubernetes Observability Stack
+![Terraform](https://github.com/PH536-UI/observability-stack-kubernetes/actions/workflows/terraform.yml/badge.svg)# Kubernetes Observability Stack
 
 Projeto de observabilidade executado localmente utilizando Kubernetes (Kind).
 
