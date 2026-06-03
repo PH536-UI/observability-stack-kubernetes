@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"promtail","namespace":"observability"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"promtail"}},"template":{"metadata":{"labels":{"app":"promtail"}},"spec":{"containers":[{"args":["-config.file=/etc/promtail/promtail.yaml"],"image":"grafana/promtail:2.9.8","name":"promtail","volumeMounts":[{"mountPath":"/etc/promtail","name":"config"},{"mountPath":"/var/log","name":"varlog"}]}],"volumes":[{"configMap":{"name":"promtail-config"},"name":"config"},{"hostPath":{"path":"/var/log"},"name":"varlog"}]}}}}
+  creationTimestamp: "2026-06-02T13:00:00Z"
+  generation: 1
+  name: promtail
+  namespace: observability
+  resourceVersion: "125191"
+  uid: 1f0ffc2e-cca8-4c5b-993a-87d413f0b4c8
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: promtail
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: promtail
+    spec:
+      containers:
+      - args:
+        - -config.file=/etc/promtail/promtail.yaml
+        image: grafana/promtail:2.9.8
+        imagePullPolicy: IfNotPresent
+        name: promtail
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/promtail
+          name: config
+        - mountPath: /var/log
+          name: varlog
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: promtail-config
+        name: config
+      - hostPath:
+          path: /var/log
+          type: ""
+        name: varlog
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2026-06-02T13:00:00Z"
+    lastUpdateTime: "2026-06-02T13:00:05Z"
+    message: ReplicaSet "promtail-5b848bd444" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2026-06-02T16:41:59Z"
+    lastUpdateTime: "2026-06-02T16:41:59Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
